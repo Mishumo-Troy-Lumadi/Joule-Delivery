@@ -38,22 +38,6 @@ class SignInFragment : Fragment() {
         app = requireActivity().application as JouleApp
         repository = app.repository
 
-        /*
-        binding.btnSignIn.isEnabled = false
-        binding.txtCurrentPassword.editText!!.setOnKeyListener { _, _, _ ->
-            if (binding.txtCurrentEmail.editText.toString().isNotEmpty() &&
-                binding.txtCurrentEmail.editText.toString().contains('@') &&
-                binding.txtCurrentEmail.editText.toString().contains('.')
-            ) {
-                binding.btnSignIn.isEnabled =
-                    binding.txtCurrentPassword.editText.toString().length >= 6
-            }
-
-            true
-        }
-         */
-
-
         binding.btnSignIn.setOnClickListener {
 
             try {
