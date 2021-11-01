@@ -11,10 +11,15 @@ import com.troy.joule.ui.fragments.main.viewModel.SharedViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
+    private var binding: ActivityMainBinding? = null
+
     lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding =
+
         setContentView(R.layout.activity_main)
 
         val app = (application as JouleApp)

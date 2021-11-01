@@ -46,7 +46,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         binding.mapView.getMapAsync(this)
         sharedViewModel.getDrivers()
 
-
         return binding.root
     }
 
