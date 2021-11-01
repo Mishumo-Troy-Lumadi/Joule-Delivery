@@ -1,6 +1,7 @@
 package com.troy.joule.repository.webservice
 
 import com.troy.joule.repository.models.Delivery
+import com.troy.joule.repository.models.Driver
 import com.troy.joule.repository.models.Invoice
 import com.troy.joule.repository.models.User
 import com.troy.joule.repository.webservice.objects.Constants
@@ -17,7 +18,7 @@ interface JouleWebService {
      * @param user
      * @return Response<User>
      */
-    @POST("/api/v1/auth/login")
+    @POST("/api/v1/auth/signin")
     suspend fun login(@Body user: User): Response<User>
 
     /**
@@ -25,7 +26,7 @@ interface JouleWebService {
      * @param user
      * @return Response<User>
      */
-    @POST("/api/v1/auth/register")
+    @POST("/api/v1/auth/signup")
     suspend fun register(@Body user: User): Response<User>
 
     /**
@@ -34,6 +35,13 @@ interface JouleWebService {
      */
     @GET("/api/v1/invoices")
     suspend fun getAllInvoices(): Response<List<Invoice>>
+
+    /**
+     * Get All invoices
+     * @return Response<List<Invoice>>
+     */
+    @GET("/api/v1/users/type/Driver")
+    suspend fun getAllDrivers(): Response<List<Driver>>
 
     /**
      * Get All invoices by status

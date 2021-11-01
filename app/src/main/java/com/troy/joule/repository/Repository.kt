@@ -5,10 +5,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.troy.joule.repository.database.JouleDatabase
 import com.troy.joule.repository.models.Delivery
+import com.troy.joule.repository.models.Driver
 import com.troy.joule.repository.models.User
 import com.troy.joule.repository.webservice.JouleWebService
 import com.troy.joule.repository.webservice.objects.Constants.TAG
 import com.troy.joule.repository.webservice.objects.RetrofitInstance
+import retrofit2.Response
 
 class Repository {
 
@@ -74,5 +76,9 @@ class Repository {
 
     fun getUser(): LiveData<List<User>> {
         return database!!.userDao().getUser()
+    }
+
+    suspend fun getDrivers(): Response<List<Driver>> {
+        return webService!!.getAllDrivers()
     }
 }

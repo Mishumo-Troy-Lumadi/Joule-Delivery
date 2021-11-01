@@ -11,7 +11,7 @@ data class Invoice(
     val id: String,
     val distance: Double,
     val subTotal: Double,
-    val Promotion: Double,
+    val promotion: Double,
     val startLatitude: Double,
     val startLongitude: Double,
     val endLatitude: Double,
