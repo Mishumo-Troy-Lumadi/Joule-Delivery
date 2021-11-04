@@ -9,5 +9,73 @@
         android:id="@+id/navigation_home"
         android:name="com.troy.joule.ui.fragments.main.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_deliveryFragment"
+            app:destination="@id/deliveryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_invoices"
+        android:name="com.troy.joule.ui.fragments.main.InvoicesFragment"
+        android:label="fragment_invoices"
+        tools:layout="@layout/fragment_invoices" >
+        <action
+            android:id="@+id/action_navigation_invoices_to_invoiceFragment"
+            app:destination="@id/invoiceFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/deliveryFragment"
+        android:name="com.troy.joule.ui.fragments.helpers.DeliveryFragment"
+        android:label="fragment_delivery"
+        tools:layout="@layout/fragment_delivery" >
+        <action
+            android:id="@+id/action_deliveryFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment"
+            app:popUpTo="@id/scheduleFragment" />
+        <argument
+            android:name="startLocation"
+            app:argType="com.troy.joule.repository.models.JouleLocation" />
+        <argument
+            android:name="endLocation"
+            app:argType="com.troy.joule.repository.models.JouleLocation" />
+    </dialog>
+    <dialog
+        android:id="@+id/scheduleFragment"
+        android:name="com.troy.joule.ui.fragments.helpers.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule" >
+        <action
+            android:id="@+id/action_scheduleFragment_to_invoiceFragment"
+            app:destination="@id/invoiceFragment"
+            app:popUpTo="@id/trackingFragment" />
+        <argument
+            android:name="delivery"
+            app:argType="com.troy.joule.repository.models.Delivery" />
+    </dialog>
+    <fragment
+        android:id="@+id/invoiceFragment"
+        android:name="com.troy.joule.ui.fragments.main.InvoiceFragment"
+        android:label="NoMenu"
+        tools:layout="@layout/fragment_invoice">
+        <action
+            android:id="@+id/action_invoiceFragment_to_navigation_invoices"
+            app:destination="@id/navigation_invoices" />
+        <action
+            android:id="@+id/action_invoiceFragment_to_trackingFragment"
+            app:destination="@id/trackingFragment"
+            app:popUpTo="@id/navigation_invoices"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.troy.joule.ui.fragments.helpers.TrackingFragment"
+        android:label="NoMenu"
+        tools:layout="@layout/fragment_tracking" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>

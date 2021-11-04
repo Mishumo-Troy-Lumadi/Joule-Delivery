@@ -3,9 +3,13 @@ package com.troy.joule
 import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import androidx.core.content.ContextCompat
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -95,5 +99,14 @@ object Methods {
             }
         }
         return color
+    }
+
+    fun bitmapDescriptorFromVector(context: Context,vectorResId:Int): BitmapDescriptor?{
+        return ContextCompat.getDrawable(context,vectorResId)?.run {
+            setBounds(0,0, this.intrinsicWidth,this.intrinsicHeight)
+            val bitmap = Bitmap.createBitmap(this.intrinsicWidth,this.intrinsicHeight,Bitmap.Config.ARGB_8888)
+            draw(Canvas(bitmap))
+            BitmapDescriptorFactory.fromBitmap(bitmap)
+        }
     }
 }

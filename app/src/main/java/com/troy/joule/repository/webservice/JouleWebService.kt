@@ -1,15 +1,9 @@
 package com.troy.joule.repository.webservice
 
-import com.troy.joule.repository.models.Delivery
-import com.troy.joule.repository.models.Driver
-import com.troy.joule.repository.models.Invoice
-import com.troy.joule.repository.models.User
+import com.troy.joule.repository.models.*
 import com.troy.joule.repository.webservice.objects.Constants
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface JouleWebService {
 
@@ -57,16 +51,19 @@ interface JouleWebService {
      * @param delivery
      * @return Response<List<Invoice>>
      */
-    @POST("/api/v1/users/{uid}/invoices")
-    suspend fun scheduleCollection(@Path("uid")uid: String,@Body delivery: Delivery): Response<Invoice>
+    @POST("/api/v1/invoices/client/{uid}")
+    suspend fun scheduleCollection(
+        @Path("uid") uid: String,
+        @Body delivery: Delivery
+    ): Response<Invoice>
 
     /**
      * Get All User invoices
      * @param uid
      * @return Response<List<Invoice>>
      */
-    @GET("/api/v1/users/{uid}/invoices")
-    suspend fun getUserInvoices(@Path("uid")uid: String): Response<List<Invoice>>
+    @GET("/api/v1/invoices/client/{uid}")
+    suspend fun getUserInvoices(@Path("uid") uid: String): Response<List<Invoice>>
 
     /**
      * Get All User invoice by id
@@ -74,5 +71,16 @@ interface JouleWebService {
      * @return Response<Invoice>
      */
     @GET("/api/v1/users/{uid}/invoices/{invoice}")
-    suspend fun getUserInvoicesByID(@Path("uid")uid: String,@Path("invoice")invoice: String): Response<Invoice>
+    suspend fun getUserInvoicesByID(
+        @Path("uid") uid: String,
+        @Path("invoice") invoice: String
+    ): Response<Invoice>
+
+    /**
+     * Updates user location
+     * @param uid
+     * @param location
+     */
+    @PATCH("/api/v1/users/{uid}/location")
+    suspend fun updateUserLocation(@Path("uid") uid: String, @Body location: JouleLocation)
 }

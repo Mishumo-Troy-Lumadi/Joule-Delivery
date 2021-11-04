@@ -8,6 +8,6 @@ data class Driver(
     val id: String,
     val createdAt: String,
     val fullName: String,
-    val latitude: Double,
-    val longitude: Double,
+    val latitude: String,
+    val longitude: String,
 )

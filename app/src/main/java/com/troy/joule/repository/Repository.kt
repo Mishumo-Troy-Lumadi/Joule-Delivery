@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.troy.joule.repository.database.JouleDatabase
-import com.troy.joule.repository.models.Delivery
-import com.troy.joule.repository.models.Driver
-import com.troy.joule.repository.models.User
+import com.troy.joule.repository.models.*
 import com.troy.joule.repository.webservice.JouleWebService
 import com.troy.joule.repository.webservice.objects.Constants.TAG
 import com.troy.joule.repository.webservice.objects.RetrofitInstance
@@ -46,14 +44,15 @@ class Repository {
 
     }
 
-    suspend fun scheduleCollection(uid: String, delivery: Delivery) {
+    suspend fun scheduleCollection(uid: String, delivery: Delivery): Invoice? {
         val response = webService?.scheduleCollection(uid, delivery)
 
         if (response!!.isSuccessful) {
             database!!.invoiceDao().addInvoice(response.body()!!)
             // database!!.close()
+            return response.body()
         }
-
+        return null
     }
 
     suspend fun loadInvoices(uid: String) {
@@ -63,10 +62,19 @@ class Repository {
 
             val invoices = response.body()!!
 
-            database!!.invoiceDao().reset()
+            val previous =database!!.invoiceDao().getInvoices().value
 
-            invoices.forEach { invoice ->
-                database!!.invoiceDao().addInvoice(invoice)
+            if (previous == null) {
+                    invoices.forEach { invoice ->
+                        database!!.invoiceDao().addInvoice(invoice)
+                    }
+            }else{
+                if (previous.size < response.body()!!.size) {
+                    database!!.invoiceDao().reset()
+                    invoices.forEach { invoice ->
+                        database!!.invoiceDao().addInvoice(invoice)
+                    }
+                }
             }
 
             // database!!.close()
@@ -80,5 +88,13 @@ class Repository {
 
     suspend fun getDrivers(): Response<List<Driver>> {
         return webService!!.getAllDrivers()
+    }
+
+    fun getInvoice(id: String): LiveData<Invoice> {
+        return database!!.invoiceDao().getInvoice(id)
+    }
+
+    suspend fun updateLocation(uid: String,location: JouleLocation){
+        webService!!.updateUserLocation(uid,location)
     }
 }

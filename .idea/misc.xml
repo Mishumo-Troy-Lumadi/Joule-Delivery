@@ -3,13 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/drawable/ic_courier.xml" value="0.23692307692307693" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/drawable/ic_ic_ecommerce_qr.xml" value="0.23692307692307693" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/drawable/ic_ic_shopping_box.xml" value="0.23692307692307693" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/drawable/ic_invoice.xml" value="0.23692307692307693" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/drawable/ic_pin.xml" value="0.23692307692307693" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/activity_auth.xml" value="0.22447916666666667" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/component_invoice.xml" value="0.22447916666666667" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/fragment_delivery.xml" value="0.22447916666666667" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/fragment_home.xml" value="0.22447916666666667" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/fragment_invoice.xml" value="0.22447916666666667" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/fragment_invoices.xml" value="0.1" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/fragment_schedule.xml" value="0.22447916666666667" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/fragment_sign_in.xml" value="0.22447916666666667" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/fragment_sign_up.xml" value="0.22447916666666667" />
+        <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/layout/fragment_tracking.xml" value="0.22447916666666667" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/menu/main_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/Projects/2021-Repo/Joule/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2" />
       </map>
