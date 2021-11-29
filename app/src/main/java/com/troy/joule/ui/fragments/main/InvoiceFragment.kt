@@ -1,5 +1,8 @@
 package com.troy.joule.ui.fragments.main
 
+import android.annotation.SuppressLint
+import android.location.Geocoder
+import android.media.metrics.TrackChangeEvent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -71,11 +74,19 @@ class InvoiceFragment : Fragment(), OnMapReadyCallback , SwipeRefreshLayout.OnRe
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun load(){
         repository.getInvoice(args.id).observe(viewLifecycleOwner){ invoice->
 
             if(invoice != null) {
-                binding.txtDate.editText!!.setText(invoice.createdAt)
+                val geocoder = Geocoder(context)
+                val address = geocoder.getFromLocation(invoice.endLatitude.toDouble(),invoice.endLongitude.toDouble(),1)
+                val d  = address[0].getAddressLine(0)
+
+                val a = d.toString().split(",")
+                val dest = a[0] + " " + a[1] + " " + a[2]
+
+                binding.txtDate.editText!!.setText(invoice.createdAt.substring(0,10))
                 binding.txtId.text = invoice.id
                 binding.txtStatus.text = invoice.status
                 binding.txtStatus.setTextColor(Methods.assignColor(requireContext(), invoice.status))
@@ -85,13 +96,20 @@ class InvoiceFragment : Fragment(), OnMapReadyCallback , SwipeRefreshLayout.OnRe
                         200
                     )
                 )
+                binding.txtDestinaton.editText!!.setText(dest)
+                binding.txtTotal.editText!!.setText("R" + invoice.subTotal)
 
                 val destination = LatLng(invoice.endLatitude.toDouble(), invoice.endLongitude.toDouble())
 
                 map.addMarker(MarkerOptions().position(destination))
 
-                val cameraUpdateFactory = CameraUpdateFactory.newLatLngZoom(destination, 14f)
+                val cameraUpdateFactory = CameraUpdateFactory.newLatLngZoom(destination, 17f)
                 map.animateCamera(cameraUpdateFactory)
+
+                if (invoice.driver === null){
+                    binding.btnTrack.isEnabled = false
+                    binding.txtDriver.editText!!.setText("Not Assigned")
+                }
 
                 binding.btnTrack.setOnClickListener {
                     val action =

@@ -43,10 +43,13 @@ class ComponentInvoiceAdapter(val invoicesFragment: InvoicesFragment) : ListAdap
 
         val invoice = getItem(position)
         val address = geocoder.getFromLocation(invoice.endLatitude.toDouble(),invoice.endLongitude.toDouble(),1)
-        val destination  = address[0].getAddressLine(0)
+        val d  = address[0].getAddressLine(0)
 
-        holder.date.text = invoice.createdAt
-        holder.image.setImageBitmap(Methods.generateQRCode("http://jouleio.herokuapp.com/api/v1/users/${invoice.user}/invoices/${invoice.id}",70))
+        val a = d.toString().split(",")
+        val destination = a[0] + " " + a[1] + " " + a[2]
+
+        holder.date.text = invoice.createdAt.substring(0,10)
+        holder.image.setImageBitmap(Methods.generateQRCode("http://jouleio.herokuapp.com/api/v1/invoices/${invoice.id}",70))
         holder.status.text = invoice.status
         holder.status.setTextColor(Methods.assignColor(context,invoice.status))
         holder.destination.text = destination

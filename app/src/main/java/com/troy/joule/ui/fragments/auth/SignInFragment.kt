@@ -79,7 +79,6 @@ class SignInFragment : Fragment() {
 
                                 } else {
                                     Snackbar.make(it, "Invalid Credentials", Snackbar.LENGTH_LONG).show()
-
                                 }
                             }
 

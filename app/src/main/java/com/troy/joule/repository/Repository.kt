@@ -25,7 +25,6 @@ class Repository {
 
         if (response!!.isSuccessful) {
             database!!.clearAllTables()
-            Log.d(TAG, "login: ${response.body()}")
             database!!.userDao().addUser(response.body()!!)
             // database!!.close()
             return true
@@ -33,15 +32,16 @@ class Repository {
         return false
     }
 
-    suspend fun register(user: User) {
+    suspend fun register(user: User): Boolean {
         val response = webService?.register(user)
 
         if (response!!.isSuccessful) {
             database!!.clearAllTables()
             database!!.userDao().addUser(response.body()!!)
             // database!!.close()
+            return true
         }
-
+        return false
     }
 
     suspend fun scheduleCollection(uid: String, delivery: Delivery): Invoice? {
